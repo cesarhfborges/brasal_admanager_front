@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {ToastService} from '../../shared/services/toast.service';
 
 @Component({
   selector: 'ngx-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private toastService: ToastService,
   ) {
     this.form = new FormGroup({
       username: new FormControl('cesar@darvsistemas.local', [Validators.required]),
@@ -27,14 +29,18 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.authService.login(this.form.value).subscribe(
         response => {
-          console.log(response);
           this.router.navigate(['/home']);
+        },
+        error => {
+          this.form.get('password').reset();
+          this.toastService.showToastDanger('Não foi possível efetuar login, verifique seu usuário e senha e tente novamente.', 'Atenção');
         }
       );
+    } else {
+      this.toastService.showToastWarning('Verifique os campos obrigatórios', 'Atenção');
     }
   }
 }

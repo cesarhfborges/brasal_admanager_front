@@ -7,6 +7,7 @@ import {filter, map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/services/auth.service';
+import {Usuario} from '../../../shared/models/usuario';
 
 @Component({
   selector: 'ngx-header',
@@ -16,8 +17,8 @@ import {AuthService} from '../../../shared/services/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   env = environment;
-  userPictureOnly: boolean = false;
-  user: any;
+  userPictureOnly: boolean = true;
+  usuario: Usuario;
   themes = [
     {
       value: 'default',
@@ -47,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
+    // private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private authService: AuthService,
@@ -56,10 +57,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
+    this.usuario = this.authService.getUser();
 
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+    // this.userService.getUsers()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((users: any) => this.user = users.nick);
 
     const {xl} = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
