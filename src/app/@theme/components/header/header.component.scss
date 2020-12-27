@@ -36,9 +36,10 @@
       @include nb-ltr(padding-right, 1.25rem);
       @include nb-rtl(padding-left, 1.25rem);
       text-decoration: none;
-      color: nb-theme(text-hint-color);
+      color: #ffffff;
       nb-icon {
         font-size: 1.75rem;
+        color: #ffffff;
       }
     }
 
@@ -49,6 +50,27 @@
       @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
       white-space: nowrap;
       text-decoration: none;
+      color: #ffffff;
+    }
+
+    ::ng-deep nb-actions {
+      nb-action {
+        color: #ffffff;
+        --actions-icon-color: #ffffff;
+        --actions-text-color: #ffffff;
+        nb-user {
+          .user-container {
+            .info-container {
+              .user-name {
+                color: #ffffff!important;
+              }
+            }
+          }
+        }
+        nb-icon {
+          color: #ffffff!important;
+        }
+      }
     }
   }
 

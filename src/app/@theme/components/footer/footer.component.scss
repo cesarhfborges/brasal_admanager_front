@@ -8,6 +8,12 @@
   justify-content: space-between;
   align-items: center;
 
+  span.created-by {
+    a {
+      text-decoration: none;
+    }
+  }
+
   .socials {
     font-size: 2rem;
 
