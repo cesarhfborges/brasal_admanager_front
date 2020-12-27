@@ -7,7 +7,7 @@
       "severity": "warning"
     },
     "trailing-comma": [
-      true,
+      false,
       {
         "multiline": "always",
         "singleline": "never"
@@ -34,12 +34,12 @@
     "label-position": true,
     "max-line-length": [
       true,
-      120
+      320
     ],
     "member-access": false,
     "no-arg": true,
     "no-console": [
-      true,
+      false,
       "debug",
       "log",
       "time",
@@ -58,7 +58,7 @@
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-unnecessary-initializer": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
@@ -76,8 +76,7 @@
     ],
     "radix": true,
     "semicolon": [
-      true,
-      "always"
+      false
     ],
     "triple-equals": [
       true,

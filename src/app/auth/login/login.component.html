@@ -2,7 +2,7 @@
   <nb-card accent="danger" style="max-width: 507px; width: 100%;">
     <nb-card-header>Brasal - Software LDAP</nb-card-header>
     <nb-card-body>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
           <label for="username">E-Mail:</label>
@@ -16,13 +16,13 @@
 
         <div class="row">
           <div class="col-6">
-            <button nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>
+            <button type="button" nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>
           </div>
           <div class="col-6 d-flex flex-row-reverse pt-1">
             <nb-checkbox status="info">Manter logado</nb-checkbox>
           </div>
           <div class="col-12 mt-3">
-            <button nbButton status="primary" fullWidth>Login</button>
+            <button type="submit" nbButton status="primary" fullWidth>Login</button>
           </div>
         </div>
 

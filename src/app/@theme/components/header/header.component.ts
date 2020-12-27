@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 
-import { UserData } from '../../../@core/data/users';
-import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {UserData} from '../../../@core/data/users';
+import {LayoutService} from '../../../@core/utils';
+import {filter, map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 import {environment} from '../../../../environments/environment';
+import {AuthService} from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'ngx-header',
@@ -15,11 +16,8 @@ import {environment} from '../../../../environments/environment';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   env = environment;
-
-  private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-
   themes = [
     {
       value: 'default',
@@ -38,17 +36,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
       name: 'Corporate',
     },
   ];
-
   currentTheme = 'default';
+  userMenu = [
+    // {title: 'Profile'},
+    {title: 'Sair', action: 'logout'}
+  ];
+  private destroy$: Subject<void> = new Subject<void>();
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
-
-  constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+  constructor(
+    private sidebarService: NbSidebarService,
+    private menuService: NbMenuService,
+    private themeService: NbThemeService,
+    private userService: UserData,
+    private layoutService: LayoutService,
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: AuthService,
+  ) {
   }
 
   ngOnInit() {
@@ -58,7 +61,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((users: any) => this.user = users.nick);
 
-    const { xl } = this.breakpointService.getBreakpointsMap();
+    const {xl} = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
         map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
@@ -68,10 +71,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.themeService.onThemeChange()
       .pipe(
-        map(({ name }) => name),
+        map(({name}) => name),
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+
+    this.menuService.onItemClick().subscribe(( event ) => {
+      this.onItemSelection(event.item);
+    })
   }
 
   ngOnDestroy() {
@@ -93,5 +100,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  onItemSelection( item ) {
+    if ( item.action === 'logout' ) {
+      this.authService.logout();
+    } else if ( item.action === 'profile' ) {
+      // Do something on Profile
+      console.log('Rota para Perfil')
+    }
   }
 }

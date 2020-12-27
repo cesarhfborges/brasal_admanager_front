@@ -6,6 +6,7 @@ import {PagesComponent} from './pages.component';
 import {PagesRoutingModule} from './pages-routing.module';
 import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {HomeComponent} from './home/home.component';
+import { UsuariosListarComponent } from './usuarios/listar/usuarios-listar.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {HomeComponent} from './home/home.component';
   declarations: [
     PagesComponent,
     HomeComponent,
+    UsuariosListarComponent,
   ],
 })
 export class PagesModule {

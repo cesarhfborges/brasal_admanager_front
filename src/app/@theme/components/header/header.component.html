@@ -3,7 +3,9 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-outline"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">Brasal</a>
+    <a class="logo" href="#" (click)="navigateHome()">
+      <img src="assets/images/logo_brasal_x64.png" alt="Brasal" height="48">
+    </a>
   </div>
   <span *ngIf="!env.production" style="font-weight: bold; color: #fff700; font-size: 18px">
     DEVELOPMENT
@@ -16,7 +18,7 @@
 <div class="header-container">
   <nb-actions size="small">
 
-    <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
+    <nb-action class="user-action" >
       <nb-user
         [nbContextMenu]="userMenu"
         [onlyPicture]="userPictureOnly"
