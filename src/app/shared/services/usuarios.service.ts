@@ -16,4 +16,8 @@ export class UsuariosService {
   getUsuarios(): Observable<LdapUser[]> {
     return this.http.get<LdapUser[]>(`${environment.urlApi}/usuarios`);
   }
+
+  updateUsuarios(usuario): Observable<LdapUser> {
+    return this.http.patch<LdapUser>(`${environment.urlApi}/usuarios/${usuario.objectsid}`, usuario);
+  }
 }

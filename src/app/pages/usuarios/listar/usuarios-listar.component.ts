@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UsuariosService} from '../../../shared/services/usuarios.service';
 import {LdapUser} from '../../../shared/models/ldap-user';
+import {NbDialogService} from '@nebular/theme';
+import {UsuariosEditComponent} from '../edit/usuarios-edit.component';
 
 @Component({
   selector: 'ngx-usuarios-listar',
@@ -23,7 +25,8 @@ export class UsuariosListarComponent implements OnInit {
   ];
 
   constructor(
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private dialogService: NbDialogService,
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +64,25 @@ export class UsuariosListarComponent implements OnInit {
       default:
         return 'Error';
     }
+  }
+
+  editUser(usuario: LdapUser) {
+    this.dialogService.open(UsuariosEditComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: true,
+      hasBackdrop: true,
+      hasScroll: true,
+      context: {
+        usuario: usuario,
+      },
+      dialogClass: 'model-full'
+    }).onClose.subscribe(
+      (response) => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

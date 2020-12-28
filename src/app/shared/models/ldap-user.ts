@@ -1,13 +1,15 @@
 export interface LdapUser {
   cn: string;
   name: string;
+  givenname: string;
   samaccountname: string;
   userprincipalname: string;
   displayname: string;
   distinguishedname: string;
   mail: string;
   memberof: string;
-  useraccountcontrol: string;
+  objectsid: string;
+  useraccountcontrol: Array<number>;
 }
 
 // useraccountcontrol Discritivo

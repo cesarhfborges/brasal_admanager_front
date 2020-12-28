@@ -1,0 +1,130 @@
+<nb-card style="width: 720px;">
+  <nb-card-header>Editar Usuário</nb-card-header>
+  <nb-card-body>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <nb-tabset>
+        <nb-tab tabTitle="Detalhes">
+
+          <div class="form-group">
+            <label for="objectguid">objectguid:</label>
+            <input type="text" id="objectguid" formControlName="objectguid" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="cn">CN:</label>
+            <input type="text" id="cn" formControlName="cn" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="name">name:</label>
+            <input type="text" id="name" formControlName="name" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="givenname">givenname:</label>
+            <input type="text" id="givenname" formControlName="givenname" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="samaccountname">samaccountname:</label>
+            <input type="text" id="samaccountname" formControlName="samaccountname" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="userprincipalname">userprincipalname:</label>
+            <input type="text" id="userprincipalname" formControlName="userprincipalname" nbInput fullWidth>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Outros">
+
+          <div class="form-group">
+            <label for="objectsid">objectsid:</label>
+            <input type="text" id="objectsid" formControlName="objectsid" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="displayname">displayname:</label>
+            <input type="text" id="displayname" formControlName="displayname" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="distinguishedname">distinguishedname:</label>
+            <input type="text" id="distinguishedname" formControlName="distinguishedname" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="mail">distinguishedname:</label>
+            <input type="email" id="mail" formControlName="mail" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="memberof">memberof:</label>
+            <input type="text" id="memberof" formControlName="memberof" nbInput fullWidth>
+          </div>
+
+          <div class="form-group">
+            <label for="useraccountcontrol">useraccountcontrol:</label>
+            <input type="text" id="useraccountcontrol" formControlName="useraccountcontrol" nbInput fullWidth>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Status">
+
+          <div class="row">
+
+            <div class="col-12">
+              <nb-checkbox status="info">Conta habilitada</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta desabilitada</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta habilitada, senha não requerida</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta desabilitada, senha não requerida</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta habilitada, senha não expira</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta desabilitada, senha não expira</nb-checkbox>
+            </div>
+            <div class="col-12">
+              <nb-checkbox status="info">Conta desabilitada, Senha não expira e não é requerida</nb-checkbox>
+            </div>
+
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+
+
+<!--            <div class="row">-->
+<!--              <div class="col-6">-->
+<!--                <button type="button" nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>-->
+<!--              </div>-->
+<!--              <div class="col-6 d-flex flex-row-reverse pt-1">-->
+<!--                <nb-checkbox status="info">Manter logado</nb-checkbox>-->
+<!--              </div>-->
+<!--              <div class="col-12 mt-3">-->
+<!--                <button type="submit" nbButton status="primary" fullWidth>Login</button>-->
+<!--              </div>-->
+<!--            </div>-->
+
+      <div class="row d-flex justify-content-between">
+        <div class="col-6">
+          <button nbButton fullWidth status="basic" type="button" (click)="close()"><nb-icon icon="chevron-left-outline"></nb-icon>&nbsp;Cancelar</button>
+        </div>
+        <div class="col-6">
+          <button nbButton fullWidth status="primary" type="submit"><nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar</button>
+        </div>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>
