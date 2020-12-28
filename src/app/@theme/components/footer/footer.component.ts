@@ -7,12 +7,6 @@ import { Component } from '@angular/core';
     <span class="created-by">
       © {{year | date : 'yyyy'}} Todos os direitos resevados. <b><a href="https://www.brasal.com.br/" target="_blank">Brasal</a></b>
     </span>
-    <div class="socials">
-      <a href="#" target="_blank" class="ion ion-social-github"></a>
-      <a href="#" target="_blank" class="ion ion-social-facebook"></a>
-      <a href="#" target="_blank" class="ion ion-social-twitter"></a>
-      <a href="#" target="_blank" class="ion ion-social-linkedin"></a>
-    </div>
   `,
 })
 export class FooterComponent {

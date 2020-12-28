@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InputFocusDirective } from './directives/input-focus.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InputFocusDirective
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+  ],
+  exports: [
+    InputFocusDirective
   ]
 })
 export class SharedModule { }

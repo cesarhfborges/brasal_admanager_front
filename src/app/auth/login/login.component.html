@@ -1,12 +1,14 @@
 <div style="display: flex; height: 100%; justify-content: center; align-items: center;position: relative;z-index: 99999999">
-  <nb-card accent="danger" style="max-width: 507px; width: 100%;">
-    <nb-card-header>Brasal - Software LDAP</nb-card-header>
+  <nb-card accent="danger" style="max-width: 507px; width: 100%;" [nbSpinner]="loading" nbSpinnerMessage="Aguarde efetuando login." nbSpinnerStatus="primary">
+    <nb-card-header>
+      <img src="assets/images/logo_brasal.png" alt="Brasal - Software LDAP" style="margin: 0 auto; display: block; height: 64px;">
+    </nb-card-header>
     <nb-card-body>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
           <label for="username">E-Mail:</label>
-          <input type="email" id="username" formControlName="username" placeholder="exemplo@brasal.com.br" nbInput fullWidth>
+          <input type="text" id="username" formControlName="username" placeholder="exemplo@brasal.com.br" #inputUsuario nbInput fullWidth autofocus>
         </div>
 
         <div class="form-group">
@@ -16,7 +18,7 @@
 
         <div class="row">
           <div class="col-6">
-            <button type="button" nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>
+            <button type="button" [routerLink]="['/auth/recuperar-senha']" nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>
           </div>
           <div class="col-6 d-flex flex-row-reverse pt-1">
             <nb-checkbox status="info">Manter logado</nb-checkbox>

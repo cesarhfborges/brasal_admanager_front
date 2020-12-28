@@ -1,1 +1,44 @@
-<p>home works!</p>
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-6 col-lg-3" *ngFor="let item of lista">
+
+    <nb-card [status]="item.color">
+      <nb-card-header>
+        {{item.label}}: <b>{{item.value}}</b>
+      </nb-card-header>
+    </nb-card>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+
+    <nb-card status="success">
+      <nb-card-header>
+        Sincronizados: 250
+      </nb-card-header>
+    </nb-card>
+
+  </div>
+  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+
+    <nb-card status="info">
+      <nb-card-header>Férias: 43</nb-card-header>
+    </nb-card>
+
+  </div>
+  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+
+    <nb-card status="warning">
+      <nb-card-header>Ferias: 14</nb-card-header>
+    </nb-card>
+
+  </div>
+  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+
+    <nb-card status="danger">
+      <nb-card-header>Demitidos: 18</nb-card-header>
+    </nb-card>
+
+  </div>
+</div>

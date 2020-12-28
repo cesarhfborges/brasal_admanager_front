@@ -18,13 +18,13 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     if (state.url === '/error') {
       return true;
     } else if (this.authService.isAuthenticated()) {
-      if (['/auth/login'].includes(state.url)) {
+      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
         this.router.navigate(['/home']);
         return false;
       }
       return true;
     } else {
-      if (['/auth/login'].includes(state.url)) {
+      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
         return true;
       } else {
         this.router.navigate(['/auth/login']);
@@ -37,13 +37,13 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     if (state.url === '/error') {
       return true;
     } else if (this.authService.isAuthenticated()) {
-      if (['/auth/login'].includes(state.url)) {
+      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
         this.router.navigate(['/home']);
         return false;
       }
       return true;
     } else {
-      if (['/auth/login'].includes(state.url)) {
+      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
         return true;
       } else {
         this.router.navigate(['/auth/login']);

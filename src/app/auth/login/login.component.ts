@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {ToastService} from '../../shared/services/toast.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'ngx-login',
@@ -10,6 +11,10 @@ import {ToastService} from '../../shared/services/toast.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('inputUsuario') inputUsr: ElementRef;
+
+  loading: boolean = false;
 
   form: FormGroup;
 
@@ -19,24 +24,31 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
   ) {
     this.form = new FormGroup({
-      username: new FormControl('cesar@darvsistemas.local', [Validators.required]),
-      password: new FormControl('1234', [Validators.required]),
-      remember: new FormControl(false, [Validators.required]),
+      username: new FormControl('chborges@brasal.com.br', [Validators.required]),
+      password: new FormControl('@Dj91344356', [Validators.required]),
+      remember: new FormControl(true, [Validators.required]),
     });
   }
 
   ngOnInit(): void {
+    // this.inputUsuario.nativeElement.focus();
+    // console.log(this.inputUsr);
   }
 
   onSubmit() {
     if (this.form.valid) {
+      this.loading = true;
       this.authService.login(this.form.value).subscribe(
         response => {
+          this.loading = false;
           this.router.navigate(['/home']);
         },
         error => {
-          this.form.get('password').reset();
-          this.toastService.showToastDanger('Não foi possível efetuar login, verifique seu usuário e senha e tente novamente.', 'Atenção');
+          // this.inputUsr.nativeElement.focus();
+          if (environment.production) {
+            this.form.get('password').reset();
+          }
+          this.toastService.showToastDanger(error.message, 'Atenção');
         }
       );
     } else {

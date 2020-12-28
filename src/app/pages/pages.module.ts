@@ -3,9 +3,11 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
-  NbIconModule, NbInputModule,
+  NbIconModule,
+  NbInputModule,
   NbMenuModule,
-  NbSpinnerModule, NbTabsetModule
+  NbSpinnerModule,
+  NbTabsetModule
 } from '@nebular/theme';
 
 import {ThemeModule} from '../@theme/theme.module';
@@ -15,8 +17,9 @@ import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {HomeComponent} from './home/home.component';
 import {UsuariosListarComponent} from './usuarios/listar/usuarios-listar.component';
 import {TableModule} from 'primeng/table';
-import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {UsuariosEditComponent} from './usuarios/edit/usuarios-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule as BrSharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -33,6 +36,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     NbCheckboxModule,
     NbInputModule,
     NbTabsetModule,
+    BrSharedModule
   ],
   declarations: [
     PagesComponent,
