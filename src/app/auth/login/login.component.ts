@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
-          // this.inputUsr.nativeElement.focus();
+          this.loading = false;
+          this.inputUsr.nativeElement.focus();
           if (environment.production) {
             this.form.get('password').reset();
           }

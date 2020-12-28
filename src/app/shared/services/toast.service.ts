@@ -32,6 +32,7 @@ export class ToastService {
     this.toastrService.show(message, title, {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       status: 'success',
+      duration: 3000,
     });
   }
 
@@ -39,6 +40,7 @@ export class ToastService {
     this.toastrService.show(message, title, {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       status: 'danger',
+      duration: 3000,
     });
   }
 
@@ -46,6 +48,15 @@ export class ToastService {
     this.toastrService.show(message, title, {
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       status: 'warning',
+      duration: 3000,
+    });
+  }
+
+  showToastInfo(message, title) {
+    this.toastrService.show(message, title, {
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      status: 'info',
+      duration: 3000,
     });
   }
 }
