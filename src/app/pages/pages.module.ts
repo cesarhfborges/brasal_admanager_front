@@ -20,6 +20,10 @@ import {TableModule} from 'primeng/table';
 import {UsuariosEditComponent} from './usuarios/edit/usuarios-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule as BrSharedModule} from '../shared/shared.module';
+import {FiliaisListComponent} from './filiais/list/filiais-list.component';
+import {FiliaisEditComponent} from './filiais/edit/filiais-edit.component';
+import { AtendentesListComponent } from './atendentes/list/atendentes-list.component';
+import { AtendentesEditComponent } from './atendentes/edit/atendentes-edit.component';
 
 @NgModule({
   imports: [
@@ -43,6 +47,10 @@ import {SharedModule as BrSharedModule} from '../shared/shared.module';
     HomeComponent,
     UsuariosListarComponent,
     UsuariosEditComponent,
+    FiliaisListComponent,
+    FiliaisEditComponent,
+    AtendentesListComponent,
+    AtendentesEditComponent,
   ],
 })
 export class PagesModule {

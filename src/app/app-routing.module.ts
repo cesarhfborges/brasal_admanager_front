@@ -5,6 +5,11 @@ import {NotFoundComponent} from './pages/miscellaneous/not-found/not-found.compo
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
     canActivate: [AuthGuardService],
@@ -17,11 +22,13 @@ export const routes: Routes = [
     canActivateChild: [AuthGuardService]
   },
   {
-    path: '**',
+    path: 'error',
     component: NotFoundComponent,
   },
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home'},
+  {
+    path: '**',
+    redirectTo: '/error'
+  },
 ];
 
 const config: ExtraOptions = {

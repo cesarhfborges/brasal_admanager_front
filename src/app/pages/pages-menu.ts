@@ -7,12 +7,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/home',
   },
   {
+    title: 'Filiais',
+    icon: 'layers-outline',
+    link: '/filiais',
+  },
+  {
+    title: 'Atendentes',
+    icon: 'people-outline',
+    link: '/atendentes',
+  },
+  {
     title: 'Opções',
     group: true,
   },
   {
     title: 'Usuários',
-    icon: 'people-outline',
+    icon: 'person-outline',
     children: [
       {
         title: 'Listar',

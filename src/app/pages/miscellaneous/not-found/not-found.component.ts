@@ -1,5 +1,4 @@
-import { NbMenuService } from '@nebular/theme';
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'ngx-not-found',
@@ -8,10 +7,6 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
 
-  constructor(private menuService: NbMenuService) {
-  }
-
-  goToHome() {
-    this.menuService.navigateHome();
+  constructor() {
   }
 }

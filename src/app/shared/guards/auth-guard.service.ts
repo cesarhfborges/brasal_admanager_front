@@ -15,40 +15,42 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (state.url === '/error') {
-      return true;
-    } else if (this.authService.isAuthenticated()) {
-      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
-        this.router.navigate(['/home']);
-        return false;
-      }
-      return true;
-    } else {
-      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
-        return true;
-      } else {
-        this.router.navigate(['/auth/login']);
-        return false;
-      }
-    }
+    return true;
+    // if (state.url === '/error') {
+    //   return true;
+    // } else if (this.authService.isAuthenticated()) {
+    //   if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
+    //     this.router.navigate(['/home']);
+    //     return false;
+    //   }
+    //   return true;
+    // } else {
+    //   if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
+    //     return true;
+    //   } else {
+    //     this.router.navigate(['/auth/login']);
+    //     return false;
+    //   }
+    // }
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    if (state.url === '/error') {
-      return true;
-    } else if (this.authService.isAuthenticated()) {
-      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
-        this.router.navigate(['/home']);
-        return false;
-      }
-      return true;
-    } else {
-      if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
-        return true;
-      } else {
-        this.router.navigate(['/auth/login']);
-        return false;
-      }
-    }
+    return true;
+    // if (state.url === '/error') {
+    //   return true;
+    // } else if (this.authService.isAuthenticated()) {
+    //   if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
+    //     this.router.navigate(['/home']);
+    //     return false;
+    //   }
+    //   return true;
+    // } else {
+    //   if (['/auth/login', '/auth/recuperar-senha'].includes(state.url)) {
+    //     return true;
+    //   } else {
+    //     this.router.navigate(['/auth/login']);
+    //     return false;
+    //   }
+    // }
   }
 }
