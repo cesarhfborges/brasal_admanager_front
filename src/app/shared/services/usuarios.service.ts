@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Usuario} from '../models/usuario';
 import {environment} from '../../../environments/environment';
-import {LdapUser} from '../models/ldap-user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,11 @@ export class UsuariosService {
     private http: HttpClient
   ) { }
 
-  getUsuarios(): Observable<LdapUser[]> {
-    return this.http.get<LdapUser[]>(`${environment.urlApi}/usuarios`);
+  getUsuarios(page: number = 1): Observable<any> {
+    return this.http.get<any>(`${environment.urlApi}/users?page=${page}`);
   }
 
-  updateUsuarios(usuario): Observable<LdapUser> {
-    return this.http.patch<LdapUser>(`${environment.urlApi}/usuarios/${usuario.objectsid}`, usuario);
+  updateUsuarios(id: number, usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${environment.urlApi}/users/${id}`, usuario);
   }
 }

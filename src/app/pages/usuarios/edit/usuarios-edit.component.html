@@ -1,130 +1,87 @@
-<nb-card style="width: 720px;">
-  <nb-card-header>Editar Usuário</nb-card-header>
-  <nb-card-body>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <nb-card style="width: 720px;" [nbSpinner]="loading.usuarios" nbSpinnerMessage="Carregando lista de usuários..." nbSpinnerStatus="primary">
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <nb-tabset>
-        <nb-tab tabTitle="Detalhes">
+      <nb-card-header>Editar Usuário</nb-card-header>
 
-          <div class="form-group">
-            <label for="objectguid">objectguid:</label>
-            <input type="text" id="objectguid" formControlName="objectguid" nbInput fullWidth>
-          </div>
+      <nb-card-body>
 
-          <div class="form-group">
-            <label for="cn">CN:</label>
-            <input type="text" id="cn" formControlName="cn" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="name">name:</label>
-            <input type="text" id="name" formControlName="name" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="givenname">givenname:</label>
-            <input type="text" id="givenname" formControlName="givenname" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="samaccountname">samaccountname:</label>
-            <input type="text" id="samaccountname" formControlName="samaccountname" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="userprincipalname">userprincipalname:</label>
-            <input type="text" id="userprincipalname" formControlName="userprincipalname" nbInput fullWidth>
-          </div>
-
-        </nb-tab>
-        <nb-tab tabTitle="Outros">
-
-          <div class="form-group">
-            <label for="objectsid">objectsid:</label>
-            <input type="text" id="objectsid" formControlName="objectsid" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="displayname">displayname:</label>
-            <input type="text" id="displayname" formControlName="displayname" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="distinguishedname">distinguishedname:</label>
-            <input type="text" id="distinguishedname" formControlName="distinguishedname" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="mail">distinguishedname:</label>
-            <input type="email" id="mail" formControlName="mail" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="memberof">memberof:</label>
-            <input type="text" id="memberof" formControlName="memberof" nbInput fullWidth>
-          </div>
-
-          <div class="form-group">
-            <label for="useraccountcontrol">useraccountcontrol:</label>
-            <input type="text" id="useraccountcontrol" formControlName="useraccountcontrol" nbInput fullWidth>
-          </div>
-
-        </nb-tab>
-        <nb-tab tabTitle="Status">
-
-          <div class="row">
-
-            <div class="col-12">
-              <nb-checkbox status="info">Conta habilitada</nb-checkbox>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="name">Nome:</label>
+              <input type="text" id="name" formControlName="name" nbInput fullWidth>
             </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta desabilitada</nb-checkbox>
-            </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta habilitada, senha não requerida</nb-checkbox>
-            </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta desabilitada, senha não requerida</nb-checkbox>
-            </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta habilitada, senha não expira</nb-checkbox>
-            </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta desabilitada, senha não expira</nb-checkbox>
-            </div>
-            <div class="col-12">
-              <nb-checkbox status="info">Conta desabilitada, Senha não expira e não é requerida</nb-checkbox>
-            </div>
-
           </div>
-
-        </nb-tab>
-      </nb-tabset>
-
-
-<!--            <div class="row">-->
-<!--              <div class="col-6">-->
-<!--                <button type="button" nbButton status="warning" ghost size="small" style="padding: 4px 2px;margin-top: 4px;">Esqueci a senha</button>-->
-<!--              </div>-->
-<!--              <div class="col-6 d-flex flex-row-reverse pt-1">-->
-<!--                <nb-checkbox status="info">Manter logado</nb-checkbox>-->
-<!--              </div>-->
-<!--              <div class="col-12 mt-3">-->
-<!--                <button type="submit" nbButton status="primary" fullWidth>Login</button>-->
-<!--              </div>-->
-<!--            </div>-->
-
-      <div class="row d-flex justify-content-between">
-        <div class="col-6">
-          <button nbButton fullWidth status="basic" type="button" (click)="close()"><nb-icon icon="chevron-left-outline"></nb-icon>&nbsp;Cancelar</button>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="username">Usuario:</label>
+              <input type="text" id="username" name="username" formControlName="username" nbInput fullWidth>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="email">E-Mail:</label>
+              <input type="text" id="email" name="email" formControlName="email" nbInput fullWidth>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="station_id">name:</label>
+              <ng-select
+                formControlName="station_id"
+                [items]="postos"
+                bindLabel="name"
+                bindValue="id"
+                id="station_id"
+                [loading]="loading.postos"
+                [loadingText]="'Carregando...'"
+                [notFoundText]="'Lista de Postos Vázia'"
+                [clearable]="false"
+                [searchable]="true"
+              >
+                <ng-template let-item="item" ng-label-tmp>
+                  {{item.id}} - {{item.name}}
+                </ng-template>
+                <ng-template let-index="index" let-item="item" ng-option-tmp>
+                  {{item.id}} - {{item.name}}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
         </div>
-        <div class="col-6">
-          <button nbButton fullWidth status="primary" type="submit"><nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar</button>
+
+        <div class="row">
+          <div class="col-12 col-xl-6">
+            <div class="form-group">
+              <label for="name">Data cadastro:</label>
+              <input type="text" [value]="usuario.created_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+            </div>
+          </div>
+          <div class="col-12 col-xl-6">
+            <div class="form-group">
+              <label for="name">Últ. atualização:</label>
+              <input type="text" [value]="usuario.updated_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+            </div>
+          </div>
         </div>
-      </div>
 
-    </form>
+      </nb-card-body>
 
-  </nb-card-body>
-</nb-card>
+      <nb-card-footer>
+
+        <div class="row d-flex justify-content-between">
+          <div class="col-6">
+            <button nbButton fullWidth status="basic" type="button" (click)="close()"><nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar</button>
+          </div>
+          <div class="col-6">
+            <button nbButton fullWidth status="success" type="submit"><nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar</button>
+          </div>
+        </div>
+
+      </nb-card-footer>
+
+
+  </nb-card>
+
+</form>

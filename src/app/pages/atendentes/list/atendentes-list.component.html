@@ -1,26 +1,99 @@
-<nb-card>
-  <nb-card-header>Nebula</nb-card-header>
-  <nb-card-body>
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-md-10 col-xl-8">
+    <nb-card>
+      <nb-card-header>
+        <div class="row">
+          <div class="col-4">
 
-    <p-table [value]="atendentes">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Quantity</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-product>
-        <tr>
-          <td>{{product.code}}</td>
-          <td>{{product.name}}</td>
-          <td>{{product.category}}</td>
-          <td>{{product.quantity}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4"></div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
 
-  </nb-card-body>
-  <nb-card-footer>By Wikipedia</nb-card-footer>
-</nb-card>
+        <p-table
+          [value]="atendentes"
+          [columns]="cols"
+          [loading]="loading.atendentes"
+          dataKey="id"
+          [rows]="15"
+        >
+          <ng-template pTemplate="loading">
+            <tr>
+              <th colspan="{{cols.length}}" class="text-center">
+                Carregando Aguarde...
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [ngStyle]="{width: col.width}" class="{{col.class}}">
+                {{col.header}}
+              </th>
+              <th style="width: 100px;"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of cols" class="{{col.class}}">
+                {{rowData[col.field]}}
+              </td>
+              <td class="d-flex justify-content-end">
+                <button type="button" nbButton outline [routerLink]="['/atendentes', rowData.id]" [state]="rowData">
+                  <nb-icon icon="edit-outline"></nb-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <div class="row pt-3" *ngIf="pagination">
+          <div class="col-2 pt-2">
+            <p class="p-0 m-0">Total: {{pagination.total}}</p>
+          </div>
+          <div class="col-10 d-flex justify-content-end">
+
+            <nav aria-label="navigation">
+              <ul class="pagination">
+                <li class="page-item">
+                  <button
+                    class="page-link"
+                    (click)="getAtendentes(1)"
+                    [disabled]="pagination.current_page == 1"
+                  >
+                    Primeira
+                  </button>
+                </li>
+                <li class="page-item" *ngFor="let link of pagination.links; let i = index">
+                  <button
+                    class="page-link"
+                    [class.active]="link.active"
+                    [disabled]="link.active || !link.url"
+                    [ngSwitch]="link.label"
+                    (click)="getAtendentes(parseUrl(link.url))"
+                  >
+                    <ng-template ngSwitchCase="pagination.next">Próximo</ng-template>
+                    <ng-template ngSwitchCase="pagination.previous">Anterior</ng-template>
+                    <ng-template ngSwitchDefault>{{link.label}}</ng-template>
+                  </button>
+                </li>
+                <li class="page-item">
+                  <button
+                    class="page-link"
+                    (click)="getAtendentes(pagination.last_page)"
+                    [disabled]="pagination.current_page >= pagination.last_page"
+                  >
+                    Última
+                  </button>
+                </li>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

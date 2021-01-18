@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {PostosService} from '../../../shared/services/postos.service';
 import {Posto} from '../../../shared/models/posto';
-import {StateService} from '../../../@core/utils';
+import {Pagination} from '../../../shared/models/pagination';
 
 @Component({
   selector: 'ngx-filiais-list',
@@ -11,47 +11,50 @@ import {StateService} from '../../../@core/utils';
 })
 export class FiliaisListComponent implements OnInit {
 
-  pagSetup = {
-    size: 10,
-  };
 
   loading = {
     filiais: false,
   };
 
+  pagination: Pagination;
+
   postos: Posto[];
 
   cols = [
-    {field: 'id', header: '#'},
-    {field: 'cnpj', header: 'CNPJ'},
-    {field: 'name', header: 'Nome'},
-    {field: 'itau_client_id', header: 'Itaú'},
-    {field: 'created_at', header: 'Data'},
+    {field: 'id', header: '#', width: '100px', class: 'text-center'},
+    {field: 'cnpj', header: 'CNPJ', width: 'auto', class: ''},
+    {field: 'name', header: 'Nome', width: 'auto', class: ''},
   ];
 
 
   constructor(
     private router: Router,
     private postosService: PostosService,
-    private stateService: StateService,
   ) {
   }
 
   ngOnInit(): void {
-    this.getPostos();
+    this.getPostos(1);
   }
 
-  getPostos() {
+  getPostos(page: number) {
     this.loading.filiais = true;
-    this.postosService.getPostos().subscribe(
+    this.postosService.getPostos(page).subscribe(
       response => {
+        console.log(response);
         this.loading.filiais = false;
         this.postos = response.data;
+        this.pagination = response;
+        delete this.pagination['data'];
       },
       e => {
         console.log(e);
         this.loading.filiais = false;
       }
     );
+  }
+
+  parseUrl(page: string): number {
+    return Number(page.replace('https://hpix.brasal.com.br/api/sandbox/admin/users?page=', ''))
   }
 }

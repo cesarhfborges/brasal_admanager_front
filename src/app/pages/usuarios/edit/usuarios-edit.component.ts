@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NbDialogRef} from '@nebular/theme';
-import {LdapUser} from '../../../shared/models/ldap-user';
 import {UsuariosService} from '../../../shared/services/usuarios.service';
+import {Usuario} from '../../../shared/models/usuario';
+import {PostosService} from '../../../shared/services/postos.service';
+import {Posto} from '../../../shared/models/posto';
 
 @Component({
   selector: 'ngx-usuarios-edit',
@@ -11,31 +13,31 @@ import {UsuariosService} from '../../../shared/services/usuarios.service';
 })
 export class UsuariosEditComponent implements OnInit {
 
-  usuario: LdapUser;
+  usuario: Usuario;
+
+  postos: Posto[];
 
   form: FormGroup;
+  loading = {
+    usuarios: false,
+    postos: false,
+  };
 
   constructor(
     protected dialogRef: NbDialogRef<any>,
     private usuariosService: UsuariosService,
+    private postosService: PostosService,
   ) {
     this.form = new FormGroup({
-      objectguid: new FormControl(null, [Validators.required]),
-      cn: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      givenname: new FormControl(null, [Validators.required]),
-      samaccountname: new FormControl(null, [Validators.required]),
-      userprincipalname: new FormControl(null, [Validators.required]),
-      displayname: new FormControl(null, [Validators.required]),
-      distinguishedname: new FormControl(null, [Validators.required]),
-      mail: new FormControl(null, [Validators.required]),
-      memberof: new FormControl(null, [Validators.required]),
-      useraccountcontrol: new FormControl(null, [Validators.required]),
-      objectsid: new FormControl(null, [Validators.required]),
+      station_id: new FormControl(null, [Validators.required]),
+      username: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
   ngOnInit(): void {
+    this.getPostos();
     this.form.patchValue(this.usuario);
   }
 
@@ -43,11 +45,24 @@ export class UsuariosEditComponent implements OnInit {
     this.dialogRef.close(null);
   }
 
-  onSubmit() {
-    this.usuariosService.updateUsuarios(this.form.value).subscribe(
+  getPostos() {
+    this.loading.postos = true;
+    this.postosService.getPostosCombo().subscribe(
       response => {
-        console.log(response);
-        this.dialogRef.close(response);
+        this.postos = response;
+        this.loading.postos = false;
+      },
+      error => {
+        console.log(error);
+        this.loading.postos = false;
+      }
+    );
+  }
+
+  onSubmit() {
+    this.usuariosService.updateUsuarios(this.usuario.id, this.form.value).subscribe(
+      response => {
+        this.dialogRef.close({status: true, data: this.form.value});
       },
       error => {
         console.log(error);
