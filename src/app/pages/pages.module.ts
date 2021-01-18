@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {
-  NbButtonModule,
-  NbCardModule,
-  NbCheckboxModule,
-  NbIconModule,
-  NbInputModule,
-  NbMenuModule,
-  NbSpinnerModule,
-  NbTabsetModule
+    NbButtonModule,
+    NbCardModule,
+    NbCheckboxModule, NbFormFieldModule,
+    NbIconModule,
+    NbInputModule,
+    NbMenuModule,
+    NbSpinnerModule,
+    NbTabsetModule
 } from '@nebular/theme';
 
 import {ThemeModule} from '../@theme/theme.module';
@@ -24,24 +24,29 @@ import {FiliaisListComponent} from './filiais/list/filiais-list.component';
 import {FiliaisEditComponent} from './filiais/edit/filiais-edit.component';
 import { AtendentesListComponent } from './atendentes/list/atendentes-list.component';
 import { AtendentesEditComponent } from './atendentes/edit/atendentes-edit.component';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {NgxMaskModule} from "ngx-mask";
 
 @NgModule({
-  imports: [
-    PagesRoutingModule,
-    ThemeModule,
-    NbMenuModule,
-    MiscellaneousModule,
-    NbCardModule,
-    NbIconModule,
-    TableModule,
-    NbSpinnerModule,
-    NbButtonModule,
-    ReactiveFormsModule,
-    NbCheckboxModule,
-    NbInputModule,
-    NbTabsetModule,
-    BrSharedModule
-  ],
+    imports: [
+        PagesRoutingModule,
+        ThemeModule,
+        NbMenuModule,
+        MiscellaneousModule,
+        NbCardModule,
+        NbIconModule,
+        TableModule,
+        NbSpinnerModule,
+        NbButtonModule,
+        ReactiveFormsModule,
+        NbCheckboxModule,
+        NbInputModule,
+        NbTabsetModule,
+        BrSharedModule,
+        NgSelectModule,
+        NbFormFieldModule,
+        NgxMaskModule
+    ],
   declarations: [
     PagesComponent,
     HomeComponent,

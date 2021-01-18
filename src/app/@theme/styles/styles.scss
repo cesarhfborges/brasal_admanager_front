@@ -18,6 +18,8 @@
 @import './layout';
 @import './overrides';
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 // install the framework and custom global styles
 @include nb-install() {
 
@@ -30,8 +32,21 @@
   @include ngx-pace-theme();
 
   @include nb-overrides();
-};
+}
+
+;
 
 body {
-  overflow: hidden!important;
+  overflow: hidden !important;
+}
+
+.ng-select .ng-select-container {
+  background-color: #f7f9fc!important;
+  border-color: #e4e9f2!important;
+  height: 40px!important;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  padding: 0.4375rem .4rem 0.4375rem 1rem;
+  border-radius: 0.25rem;
 }

@@ -1,9 +1,5 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import { Component, OnInit } from '@angular/core';
+import {NgSelectConfig} from '@ng-select/ng-select';
 
 @Component({
   selector: 'ngx-app',
@@ -11,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private ngSelectConfig: NgSelectConfig
+  ) {
+    this.ngSelectConfig.notFoundText = 'Vázio';
+    this.ngSelectConfig.appendTo = 'body';
+    this.ngSelectConfig.loadingText = 'Carregando...';
+    this.ngSelectConfig.typeToSearchText = 'Comece a digitar para pesquisar';
   }
 
   ngOnInit(): void {

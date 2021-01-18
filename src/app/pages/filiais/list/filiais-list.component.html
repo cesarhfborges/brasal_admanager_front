@@ -1,1 +1,50 @@
-<p>filiais-list works!</p>
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-4">
+
+      </div>
+      <div class="col-4"></div>
+      <div class="col-4"></div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+
+    <p-table
+      [value]="postos"
+      [columns]="cols"
+      [loading]="loading.filiais"
+      dataKey="id"
+      [rows]="15"
+    >
+      <ng-template pTemplate="loading">
+        <tr>
+          <th colspan="{{cols.length}}" class="text-center">
+            Carregando Aguarde
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of cols">
+            {{rowData[col.field]}}
+          </td>
+          <td class="d-flex justify-content-end">
+            <button type="button" nbButton outline [routerLink]="['/filiais', rowData.id]" [state]="rowData">
+              <nb-icon icon="edit-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </nb-card-body>
+</nb-card>

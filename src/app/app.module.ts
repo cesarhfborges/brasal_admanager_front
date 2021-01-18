@@ -21,6 +21,12 @@ import {
 } from '@nebular/theme';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
+import {NgSelectModule} from '@ng-select/ng-select';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgSelectModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -39,6 +46,7 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
     NbToastrModule.forRoot(),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

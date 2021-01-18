@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://127.0.0.1:8000/api'
+  urlApi: 'https://hpix.brasal.com.br/api/sandbox/admin'
 };

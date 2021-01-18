@@ -1,1 +1,36 @@
-<p>atendentes-edit works!</p>
+<nb-card>
+  <nb-card-header>Nebula</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-6">
+        <label class="col-form-label">Nome</label>
+        <input type="text" placeholder="Text field" nbInput fullWidth>
+      </div>
+      <div class="col-6">
+        <label class="col-form-label">Nome</label>
+        <input type="text" placeholder="Text field" nbInput fullWidth>
+      </div>
+      <div class="col-6">
+        <label class="col-form-label">Nome</label>
+        <input type="text" placeholder="Text field" nbInput fullWidth>
+      </div>
+      <div class="col-6">
+        <label class="col-form-label">Nome</label>
+        <ng-select>
+          <ng-option *ngFor="let item of [0,1,2,3,4,5,6]" [value]="item">{{item}}</ng-option>
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-between mt-3">
+      <div class="col-3">
+        <button type="button" nbButton fullWidth>Voltar</button>
+      </div>
+      <div class="col-3">
+        <button type="button" status="success" nbButton fullWidth>Salvar</button>
+      </div>
+    </div>
+
+  </nb-card-body>
+  <nb-card-footer>By Wikipedia</nb-card-footer>
+</nb-card>

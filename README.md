@@ -18,6 +18,8 @@ npm start
 ## Pacotes usados (Documentação)
 - [Nebular Template](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular#what-is-nebular).
 - [Angular](https://angular.io/docs).
+- [ng-select](https://github.com/ng-select/ng-select).
+- [Prime-NG](https://primefaces.org/primeng/showcase/#/).
 
 ## Problemas
 Problemas no carregamento dos pacotes

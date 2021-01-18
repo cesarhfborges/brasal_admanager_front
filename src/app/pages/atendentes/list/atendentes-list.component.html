@@ -1,1 +1,26 @@
-<p>atendentes-list works!</p>
+<nb-card>
+  <nb-card-header>Nebula</nb-card-header>
+  <nb-card-body>
+
+    <p-table [value]="atendentes">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.code}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.category}}</td>
+          <td>{{product.quantity}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </nb-card-body>
+  <nb-card-footer>By Wikipedia</nb-card-footer>
+</nb-card>

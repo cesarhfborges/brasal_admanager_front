@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   @ViewChild('inputUsuario') inputUsr: ElementRef;
 
@@ -24,18 +24,22 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
   ) {
     this.form = new FormGroup({
-      username: new FormControl('chborges@brasal.com.br', [Validators.required]),
-      password: new FormControl('@Dj91344356', [Validators.required]),
+      username: new FormControl('sandbox21', [Validators.required, Validators.minLength(2)]),
+      password: new FormControl('%h3qT$VX5t', [Validators.required, Validators.minLength(2)]),
       remember: new FormControl(true, [Validators.required]),
     });
   }
 
   ngOnInit(): void {
-    // this.inputUsuario.nativeElement.focus();
     // console.log(this.inputUsr);
   }
 
+  ngAfterViewInit(): void {
+    this.inputUsr.nativeElement.focus();
+  }
+
   onSubmit() {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.loading = true;
       this.authService.login(this.form.value).subscribe(
@@ -43,13 +47,13 @@ export class LoginComponent implements OnInit {
           this.loading = false;
           this.router.navigate(['/home']);
         },
-        error => {
+        e => {
           this.loading = false;
           this.inputUsr.nativeElement.focus();
           if (environment.production) {
             this.form.get('password').reset();
           }
-          this.toastService.showToastDanger(error.message, 'Atenção');
+          this.toastService.showToastDanger(e.error, 'Atenção');
         }
       );
     } else {

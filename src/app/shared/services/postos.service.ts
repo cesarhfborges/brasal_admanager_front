@@ -1,0 +1,21 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {Posto} from '../models/posto';
+import {map} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostosService {
+
+  constructor(
+    private http: HttpClient,
+  ) {
+  }
+
+  getPostos(): Observable<any> {
+    return this.http.get<any>(`${environment.urlApi}/stations`);
+  }
+}

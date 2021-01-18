@@ -1,1 +1,57 @@
-<p>filiais-edit works!</p>
+<div class="row d-flex justify-content-center">
+  <div class="col-8">
+    <form [formGroup]="form">
+      <nb-card>
+        <nb-card-header>Editando Posto</nb-card-header>
+        <nb-card-body>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" formControlName="name" placeholder="Text field" nbInput fullWidth>
+            </div>
+            <div class="col-6 mb-2">
+              <label for="cnpj">CNPJ</label>
+              <input
+                type="text"
+                id="cnpj"
+                name="cnpj"
+                formControlName="cnpj"
+                [dropSpecialCharacters]="true"
+                mask="00.000.000/0000-00"
+                placeholder="00.000.000/0000-00"
+                nbInput
+                fullWidth
+              >
+            </div>
+            <div class="col-6 mb-2">
+              <label for="itau_client_id">Client ID Itaú</label>
+              <input type="text" id="itau_client_id" name="itau_client_id" formControlName="itau_client_id" placeholder="xxxxxxxxxxxxxxxxx" nbInput fullWidth>
+            </div>
+          </div>
+
+          <div class="row mt-3 d-flex justify-content-between" *ngIf="posto.created_at">
+            <div class="col-5">
+              <label for="created_at">Data de Cadastro</label>
+              <input type="text" id="created_at" name="created_at" [value]="posto.created_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+            </div>
+            <div class="col-5">
+              <label for="updated_at">Data Última alt.</label>
+              <input type="text" id="updated_at" name="updated_at" [value]="posto.updated_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+            </div>
+          </div>
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row d-flex justify-content-between">
+            <div class="col-4">
+              <button type="button" [routerLink]="['/filiais']" nbButton fullWidth>Voltar</button>
+            </div>
+            <div class="col-4">
+              <button type="button" nbButton status="success" fullWidth>Salvar</button>
+            </div>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </div>
+</div>
