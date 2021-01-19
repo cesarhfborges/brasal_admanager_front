@@ -6,6 +6,7 @@ import {Pagination} from '../../../shared/models/pagination';
 import {NbDialogService} from '@nebular/theme';
 import {FiliaisEditComponent} from '../edit/filiais-edit.component';
 import {ToastService} from '../../../shared/services/toast.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-filiais-list',
@@ -109,6 +110,6 @@ export class FiliaisListComponent implements OnInit {
   }
 
   parseUrl(page: string): number {
-    return Number(page.replace('https://hpix.brasal.com.br/api/sandbox/admin/users?page=', ''))
+    return Number(page.replace(`${environment.urlApi}/attendants?page=`, ''))
   }
 }

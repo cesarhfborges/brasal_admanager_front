@@ -1,44 +1,127 @@
 <div class="row">
-  <div class="col-12 col-sm-6 col-md-6 col-lg-3" *ngFor="let item of lista">
-
-    <nb-card [status]="item.color">
+  <div class="col-12">
+    <nb-card >
       <nb-card-header>
-        {{item.label}}: <b>{{item.value}}</b>
+        Relatório
       </nb-card-header>
+      <nb-card-body>
+
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <div class="row mb-3">
+            <div class="col-12 col-md-6 col-xl-2">
+              <label>De:</label>
+              <input [nbDatepicker]="dataInicial" class="text-center" formControlName="dataInicial" nbInput fullWidth>
+              <nb-datepicker #dataInicial [max]="form.get('dataFinal').value"></nb-datepicker>
+            </div>
+            <div class="col-12 col-md-6 col-xl-2">
+              <label>Até:</label>
+              <input [nbDatepicker]="dataFinal" class="text-center" formControlName="dataFinal" nbInput fullWidth>
+              <nb-datepicker #dataFinal [min]="form.get('dataInicial').value"></nb-datepicker>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-3">
+              <label>Posto:</label>
+              <ng-select
+                [items]="filiais"
+                bindValue="id"
+                bindLabel="name"
+                [loading]="loading.filiais"
+                [searchable]="false"
+                [clearable]="true"
+                (change)="selPosto($event)"
+                formControlName="filial"
+                placeholder="Todos"
+                [loadingText]="'Carregando...'"
+              ></ng-select>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-3">
+              <label>Atendente:</label>
+              <ng-select
+                [items]="atendentes"
+                bindValue="id"
+                bindLabel="name"
+                [loading]="loading.atendentes"
+                [searchable]="false"
+                [clearable]="true"
+                formControlName="atendente"
+                placeholder="Todos"
+                [loadingText]="'Carregando...'"
+              ></ng-select>
+            </div>
+            <div class="col-12 col-xl-2" style="padding-top: 28px;">
+              <button type="submit" nbButton fullWidth status="info">Filtrar</button>
+            </div>
+          </div>
+        </form>
+
+        <p-table
+          [value]="relatorio"
+          [columns]="cols"
+          [loading]="loading.relatorio"
+          dataKey="id"
+          [rows]="15"
+          class="p-datatable-responsive-demo"
+          styleClass="p-datatable-striped p-datatable-gridlines"
+        >
+          <ng-template pTemplate="caption">
+            <div class="p-d-flex d-flex justify-content-end">
+              <button type="button" nbButton status="success" (click)="exportExcel()" class="p-button-success p-mr-2" [disabled]="!relatorio">
+                Exportar Excel
+              </button>
+<!--              <button type="button" nbButton status="warning" (click)="exportPdf()" class="p-button-success p-mr-2">-->
+<!--                Exportar PDF-->
+<!--              </button>-->
+<!--              <button type="button" pButton pRipple icon="pi pi-file-o" (click)="dt.exportCSV()" class="p-mr-2" pTooltip="CSV" tooltipPosition="bottom"></button>-->
+<!--              <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>-->
+<!--              <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info p-ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>-->
+            </div>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td [attr.colspan]="cols.length" class="text-center">
+                Lista vázia
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="loading">
+            <tr>
+              <th colspan="{{cols.length}}" class="text-center">
+                Carregando Aguarde...
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" [ngStyle]="{width: col.width}" class="{{col.class}}">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of cols" class="{{col.class}}">
+                <ng-template [ngIf]="col.subfield" [ngIfElse]="field">
+                  <span class="p-column-title">{{col.header}}</span>
+                  {{rowData[col.field][col.subfield]}}
+                </ng-template>
+                <ng-template #field>
+                  <span class="p-column-title">{{col.header}}</span>
+                  <div [ngSwitch]="col.type">
+                    <ng-template ngSwitchDefault>
+                      {{rowData[col.field]}}
+                    </ng-template>
+                    <ng-template ngSwitchCase="money">
+                      R$&nbsp;{{rowData[col.field] | number : '1.2-2'}}
+                    </ng-template>
+                    <ng-template ngSwitchCase="date">
+                      {{rowData[col.field] | date : 'dd/MM/yyyy HH:mm:ss'}}
+                    </ng-template>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </nb-card-body>
     </nb-card>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-
-    <nb-card status="success">
-      <nb-card-header>
-        Sincronizados: 250
-      </nb-card-header>
-    </nb-card>
-
-  </div>
-  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-
-    <nb-card status="info">
-      <nb-card-header>Férias: 43</nb-card-header>
-    </nb-card>
-
-  </div>
-  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-
-    <nb-card status="warning">
-      <nb-card-header>Ferias: 14</nb-card-header>
-    </nb-card>
-
-  </div>
-  <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-
-    <nb-card status="danger">
-      <nb-card-header>Demitidos: 18</nb-card-header>
-    </nb-card>
-
   </div>
 </div>

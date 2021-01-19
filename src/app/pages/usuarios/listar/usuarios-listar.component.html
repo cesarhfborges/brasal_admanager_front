@@ -21,6 +21,7 @@
           [rows]="15"
           [value]="usuarios"
           dataKey="id"
+          class="p-datatable-responsive-demo"
         >
           <ng-template pTemplate="loading">
             <tr>
@@ -74,10 +75,10 @@
         </p-table>
 
         <div *ngIf="pagination" class="row pt-3">
-          <div class="col-2 pt-2">
-            <p class="p-0 m-0">Total: {{pagination.total}}</p>
+          <div class="col-12 col-xl-2 pt-2 mb-3 mb-xl-0">
+            <p class="p-0 m-0 text-center text-lg-left">Total: {{pagination.total}}</p>
           </div>
-          <div class="col-10 d-flex justify-content-end">
+          <div class="col-12 col-xl-10 d-flex justify-content-center justify-content-xl-end">
 
             <nav aria-label="navigation">
               <ul class="pagination">
@@ -87,7 +88,8 @@
                     [disabled]="pagination.current_page == 1"
                     class="page-link"
                   >
-                    Primeira
+                    <nb-icon icon="arrowhead-left-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Primeira</span>
                   </button>
                 </li>
                 <li *ngFor="let link of pagination.links; let i = index" class="page-item">
@@ -98,8 +100,14 @@
                     [ngSwitch]="link.label"
                     class="page-link"
                   >
-                    <ng-template ngSwitchCase="pagination.next">Próximo</ng-template>
-                    <ng-template ngSwitchCase="pagination.previous">Anterior</ng-template>
+                    <ng-template ngSwitchCase="pagination.next">
+                      <nb-icon icon="chevron-right-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Próximo</span>
+                    </ng-template>
+                    <ng-template ngSwitchCase="pagination.previous">
+                      <nb-icon icon="chevron-left-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Anterior</span>
+                    </ng-template>
                     <ng-template ngSwitchDefault>{{link.label}}</ng-template>
                   </button>
                 </li>
@@ -109,7 +117,8 @@
                     [disabled]="pagination.current_page >= pagination.last_page"
                     class="page-link"
                   >
-                    Última
+                    <nb-icon icon="arrowhead-right-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Última</span>
                   </button>
                 </li>
               </ul>

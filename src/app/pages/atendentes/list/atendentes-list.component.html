@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center">
-  <div class="col-12 col-md-10 col-xl-8">
+  <div class="col-12">
     <nb-card>
       <nb-card-header>
         <div class="row">
@@ -14,6 +14,47 @@
         </div>
       </nb-card-header>
       <nb-card-body>
+
+
+        <div class="row mb-3">
+          <div class="col-3">
+            <label>Postos</label>
+            <ng-select
+              [items]="postos"
+              bindLabel="name"
+              bindValue="id"
+              [searchable]="false"
+              [clearable]="true"
+              [loading]="loading.filiais"
+              [(ngModel)]="filter.station"
+            ></ng-select>
+<!--            <nb-select placeholder="NgModel" fullWidth>-->
+<!--              <nb-option *ngFor="let posto os postos" [value]="posto.id">{{posto.name}}</nb-option>-->
+<!--            </nb-select>-->
+          </div>
+          <div class="col-3">
+            <label>Ordenar</label>
+            <nb-select placeholder="NgModel" [(ngModel)]="filter.orderBy" fullWidth>
+              <nb-option [value]="'id'">ID</nb-option>
+              <nb-option [value]="'name'">Nome</nb-option>
+              <nb-option [value]="'station_id'">Filial</nb-option>
+            </nb-select>
+          </div>
+          <div class="col-3">
+            <label>Limite</label>
+            <nb-select placeholder="NgModel" [(ngModel)]="filter.limit" fullWidth>
+              <nb-option [value]="15">15</nb-option>
+              <nb-option [value]="30">30</nb-option>
+              <nb-option [value]="50">50</nb-option>
+              <nb-option [value]="100">100</nb-option>
+            </nb-select>
+          </div>
+          <div class="col-3" style="padding-top: 28px;">
+            <button type="button" status="success" nbButton fullWidth (click)="getAtendentes(1)">
+              <nb-icon icon="plus-circle-outline"></nb-icon>&nbsp;Filtrar
+            </button>
+          </div>
+        </div>
 
         <p-table
           [value]="atendentes"
@@ -60,10 +101,10 @@
         </p-table>
 
         <div class="row pt-3" *ngIf="pagination">
-          <div class="col-2 pt-2">
-            <p class="p-0 m-0">Total: {{pagination.total}}</p>
+          <div class="col-12 col-xl-2 pt-2 mb-3 mb-xl-0">
+            <p class="p-0 m-0 text-center text-lg-left">Total: {{pagination.total}}</p>
           </div>
-          <div class="col-10 d-flex justify-content-end">
+          <div class="col-12 col-xl-10 d-flex justify-content-center justify-content-xl-end">
 
             <nav aria-label="navigation">
               <ul class="pagination">
@@ -73,7 +114,8 @@
                     (click)="getAtendentes(1)"
                     [disabled]="pagination.current_page == 1"
                   >
-                    Primeira
+                    <nb-icon icon="arrowhead-left-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Primeira</span>
                   </button>
                 </li>
                 <li class="page-item" *ngFor="let link of pagination.links; let i = index">
@@ -84,8 +126,14 @@
                     [ngSwitch]="link.label"
                     (click)="getAtendentes(parseUrl(link.url))"
                   >
-                    <ng-template ngSwitchCase="pagination.next">Próximo</ng-template>
-                    <ng-template ngSwitchCase="pagination.previous">Anterior</ng-template>
+                    <ng-template ngSwitchCase="pagination.next">
+                      <nb-icon icon="chevron-right-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Próximo</span>
+                    </ng-template>
+                    <ng-template ngSwitchCase="pagination.previous">
+                      <nb-icon icon="chevron-left-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Anterior</span>
+                    </ng-template>
                     <ng-template ngSwitchDefault>{{link.label}}</ng-template>
                   </button>
                 </li>
@@ -95,7 +143,8 @@
                     (click)="getAtendentes(pagination.last_page)"
                     [disabled]="pagination.current_page >= pagination.last_page"
                   >
-                    Última
+                    <nb-icon icon="arrowhead-right-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Última</span>
                   </button>
                 </li>
               </ul>

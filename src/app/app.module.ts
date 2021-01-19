@@ -5,7 +5,7 @@
  */
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './@core/core.module';
 import {ThemeModule} from './@theme/theme.module';
@@ -19,14 +19,27 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import {NbDateFnsDateModule, NbDateFnsOptions} from '@nebular/date-fns';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 import {NgSelectModule} from '@ng-select/ng-select';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localePt);
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
+
+const dateFnsConfig: NbDateFnsOptions = {
+  format: 'dd/MM/yyyy',
+  parseOptions: {},
+  formatOptions: {},
+  getWeekOptions: {},
+}
 
 @NgModule({
   declarations: [
@@ -38,6 +51,8 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     AppRoutingModule,
     NgSelectModule,
+    PasswordStrengthMeterModule,
+    NbDateFnsDateModule.forRoot(dateFnsConfig),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -49,6 +64,7 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [
+    {provide: LOCALE_ID, useValue: 'pt-PT'},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

@@ -7,6 +7,7 @@ import {Pagination} from '../../../shared/models/pagination';
 import {ToastService} from '../../../shared/services/toast.service';
 import {UsuariosPasswordComponent} from '../password/usuarios-password/usuarios-password.component';
 import {PostosService} from '../../../shared/services/postos.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-usuarios-listar',
@@ -65,7 +66,7 @@ export class UsuariosListarComponent implements OnInit {
   }
 
   parseUrl(page: string): number {
-    return Number(page.replace('https://hpix.brasal.com.br/api/sandbox/admin/users?page=', ''))
+    return Number(page.replace(`${environment.urlApi}/attendants?page=`, ''))
   }
 
   getPostoInfo(id: number): string {

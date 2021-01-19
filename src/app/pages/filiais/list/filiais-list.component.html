@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center">
-  <div class="col-8">
+  <div class="col-12 col-xl-8">
     <nb-card>
       <nb-card-header>
         <div class="row">
@@ -21,6 +21,7 @@
           [loading]="loading.filiais"
           dataKey="id"
           [rows]="15"
+          class="p-datatable-responsive-demo"
         >
           <ng-template pTemplate="loading">
             <tr>
@@ -40,6 +41,7 @@
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
               <td *ngFor="let col of cols" class="{{col.class}}">
+                <span class="p-column-title">{{col.header}}</span>
                 {{rowData[col.field]}}
               </td>
               <td class="d-flex justify-content-end">
@@ -52,10 +54,10 @@
         </p-table>
 
         <div class="row pt-3" *ngIf="pagination">
-          <div class="col-2 pt-2">
-            <p class="p-0 m-0">Total: {{pagination.total}}</p>
+          <div class="col-12 col-xl-2 pt-2 mb-3 mb-xl-0">
+            <p class="p-0 m-0 text-center text-lg-left">Total: {{pagination.total}}</p>
           </div>
-          <div class="col-10 d-flex justify-content-end">
+          <div class="col-12 col-xl-10 d-flex justify-content-center justify-content-xl-end">
 
             <nav aria-label="navigation">
               <ul class="pagination">
@@ -65,7 +67,8 @@
                     (click)="getPostos(1)"
                     [disabled]="pagination.current_page == 1"
                   >
-                    Primeira
+                    <nb-icon icon="arrowhead-left-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Primeira</span>
                   </button>
                 </li>
                 <li class="page-item" *ngFor="let link of pagination.links; let i = index">
@@ -76,8 +79,14 @@
                     [ngSwitch]="link.label"
                     (click)="getPostos(parseUrl(link.url))"
                   >
-                    <ng-template ngSwitchCase="pagination.next">Próximo</ng-template>
-                    <ng-template ngSwitchCase="pagination.previous">Anterior</ng-template>
+                    <ng-template ngSwitchCase="pagination.next">
+                      <nb-icon icon="chevron-right-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Próximo</span>
+                    </ng-template>
+                    <ng-template ngSwitchCase="pagination.previous">
+                      <nb-icon icon="chevron-left-outline" class="d-md-none"></nb-icon>
+                      <span class="d-none d-md-block">Anterior</span>
+                    </ng-template>
                     <ng-template ngSwitchDefault>{{link.label}}</ng-template>
                   </button>
                 </li>
@@ -87,7 +96,8 @@
                     (click)="getPostos(pagination.last_page)"
                     [disabled]="pagination.current_page >= pagination.last_page"
                   >
-                    Última
+                    <nb-icon icon="arrowhead-right-outline" class="d-md-none"></nb-icon>
+                    <span class="d-none d-md-block">Última</span>
                   </button>
                 </li>
               </ul>

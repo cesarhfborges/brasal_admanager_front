@@ -2,10 +2,10 @@ import {NgModule} from '@angular/core';
 import {
     NbButtonModule,
     NbCardModule,
-    NbCheckboxModule, NbFormFieldModule,
+    NbCheckboxModule, NbDatepickerModule, NbFormFieldModule,
     NbIconModule,
     NbInputModule,
-    NbMenuModule,
+    NbMenuModule, NbSelectModule,
     NbSpinnerModule,
     NbTabsetModule
 } from '@nebular/theme';
@@ -18,7 +18,7 @@ import {HomeComponent} from './home/home.component';
 import {UsuariosListarComponent} from './usuarios/listar/usuarios-listar.component';
 import {TableModule} from 'primeng/table';
 import {UsuariosEditComponent} from './usuarios/edit/usuarios-edit.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule as BrSharedModule} from '../shared/shared.module';
 import {FiliaisListComponent} from './filiais/list/filiais-list.component';
 import {FiliaisEditComponent} from './filiais/edit/filiais-edit.component';
@@ -27,6 +27,7 @@ import { AtendentesEditComponent } from './atendentes/edit/atendentes-edit.compo
 import {NgSelectModule} from "@ng-select/ng-select";
 import {NgxMaskModule} from "ngx-mask";
 import { UsuariosPasswordComponent } from './usuarios/password/usuarios-password/usuarios-password.component';
+import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
 
 @NgModule({
     imports: [
@@ -46,7 +47,11 @@ import { UsuariosPasswordComponent } from './usuarios/password/usuarios-password
         BrSharedModule,
         NgSelectModule,
         NbFormFieldModule,
-        NgxMaskModule
+        NgxMaskModule,
+        PasswordStrengthMeterModule,
+        NbSelectModule,
+        FormsModule,
+        NbDatepickerModule
     ],
   declarations: [
     PagesComponent,

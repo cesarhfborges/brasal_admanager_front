@@ -13,13 +13,18 @@ export class AtendentesService {
   ) {
   }
 
-  getAtendentes(page: number = 1): Observable<any> {
-    return this.http.get<any>(`${environment.urlApi}/attendants?page=${page}`);
+  getAtendentes(options = {page: 1, limit: 15, sort: 'name', station: 0}): Observable<any> {
+    return this.http.get<any>(`${environment.urlApi}/attendants?page=${options.page}&limit=${options.limit}&sort=${options.sort}&stationId=${options.station}`);
+  }
+
+  getAtendentesCombo(posto: number): Observable<any> {
+    return this.http.get<any>(`${environment.urlApi}/attendants/to-combobox?station_id=${posto}`);
   }
 
   updateAtendentes(id: number, atendente): Observable<any> {
     return this.http.put<any>(`${environment.urlApi}/attendants/${id}`, atendente);
   }
+
   createAtendentes(atendente): Observable<any> {
     return this.http.post<any>(`${environment.urlApi}/attendants`, atendente);
   }

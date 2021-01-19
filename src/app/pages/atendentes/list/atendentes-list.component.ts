@@ -6,6 +6,7 @@ import {Pagination} from '../../../shared/models/pagination';
 import {AtendentesEditComponent} from '../edit/atendentes-edit.component';
 import {ToastService} from '../../../shared/services/toast.service';
 import {PostosService} from '../../../shared/services/postos.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-atendentes-list',
@@ -23,6 +24,12 @@ export class AtendentesListComponent implements OnInit {
     filiais: false,
     atendentes: false,
   };
+
+  filter = {
+    limit: 15,
+    orderBy: 'name',
+    station: null,
+  }
 
   cols = [
     {field: 'id', header: '#', width: '160px', class: 'text-center'},
@@ -42,8 +49,8 @@ export class AtendentesListComponent implements OnInit {
     this.getPostos();
   }
 
-  getAtendentes(page: number = 1) {
-    this.atendentesService.getAtendentes(page).subscribe(
+  getAtendentes(pag: number) {
+    this.atendentesService.getAtendentes({page: pag, limit: this.filter.limit, sort: this.filter.orderBy, station: this.filter.station}).subscribe(
       response => {
         // @ts-ignore
         console.log(response.data);
@@ -94,7 +101,7 @@ export class AtendentesListComponent implements OnInit {
     }).onClose.subscribe(
       (response) => {
         if (response) {
-          this.getAtendentes();
+          this.getAtendentes(1);
           this.toastService.showToastSuccess('Atendente atualizado.', 'Sucesso');
         }
       },
@@ -105,14 +112,19 @@ export class AtendentesListComponent implements OnInit {
   }
 
   parseUrl(page: string): number {
-    return Number(page.replace('https://hpix.brasal.com.br/api/sandbox/admin/attendants?page=', ''))
+    return Number(page.replace(`${environment.urlApi}/attendants?page=`, ''))
   }
 
   getPostos() {
+    this.loading.filiais = true;
     this.postosService.getPostosCombo().subscribe(
       response => {
         this.postos = response;
-        this.getAtendentes();
+        this.loading.filiais = false;
+        this.getAtendentes(1);
+      },
+      error => {
+        this.loading.filiais = false;
       }
     );
   }
