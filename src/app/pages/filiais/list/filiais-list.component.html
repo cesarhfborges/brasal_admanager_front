@@ -3,11 +3,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row">
-          <div class="col-4">
-
+          <div class="col-8 pt-2">
+            Lista de Filiais
           </div>
-          <div class="col-4"></div>
-          <div class="col-4"></div>
+          <div class="col-4 d-flex justify-content-end">
+            <button type="button" status="success" nbButton (click)="cadastrarPosto()">
+              <nb-icon icon="plus-circle-outline"></nb-icon>&nbsp;Cadastrar
+            </button>
+          </div>
         </div>
       </nb-card-header>
       <nb-card-body>
@@ -40,7 +43,7 @@
                 {{rowData[col.field]}}
               </td>
               <td class="d-flex justify-content-end">
-                <button type="button" nbButton outline [routerLink]="['/filiais', rowData.id]" [state]="rowData">
+                <button type="button" nbButton outline status="info" (click)="editarPosto(rowData)">
                   <nb-icon icon="edit-outline"></nb-icon>
                 </button>
               </td>

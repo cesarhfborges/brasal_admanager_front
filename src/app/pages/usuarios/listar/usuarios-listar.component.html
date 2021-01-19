@@ -1,13 +1,16 @@
 <div class="row d-flex justify-content-center">
-  <div class="col-10">
+  <div class="col-12">
     <nb-card [nbSpinner]="loading.usuarios" nbSpinnerMessage="Carregando lista de usuários..." nbSpinnerStatus="primary">
       <nb-card-header>
         <div class="row">
-          <div class="col-4">
-            LIsta de Usuários
+          <div class="col-8 pt-2">
+            Lista de Usuários
           </div>
-          <div class="col-4"></div>
-          <div class="col-4"></div>
+          <div class="col-4 d-flex justify-content-end">
+            <button type="button" status="success" nbButton (click)="createUser()">
+              <nb-icon icon="plus-circle-outline"></nb-icon>&nbsp;Cadastrar
+            </button>
+          </div>
         </div>
       </nb-card-header>
       <nb-card-body>
@@ -36,8 +39,15 @@
           </ng-template>
           <ng-template let-columns="columns" let-rowData pTemplate="body">
             <tr>
-              <td *ngFor="let col of cols" class="{{col.class}}">
-                {{rowData[col.field]}}
+              <td *ngFor="let col of cols" class="{{col.class}}" [ngSwitch]="col.field">
+                <ng-template ngSwitchDefault>
+                  <span class="p-column-title">{{col.header}}</span>
+                  {{rowData[col.field]}}
+                </ng-template>
+                <ng-template ngSwitchCase="station_id">
+                  <span class="p-column-title">{{col.header}}</span>
+                  {{getPostoInfo(rowData[col.field])}}
+                </ng-template>
               </td>
               <td class="d-flex justify-content-between">
                 <button
@@ -54,6 +64,7 @@
                   outline
                   status="warning"
                   type="button"
+                  (click)="changeUserPassword(rowData)"
                 >
                   <nb-icon icon="lock-outline"></nb-icon>
                 </button>

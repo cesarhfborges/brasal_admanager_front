@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
   <nb-card style="width: 720px;" [nbSpinner]="loading.usuarios" nbSpinnerMessage="Carregando lista de usuários..." nbSpinnerStatus="primary">
 
 
@@ -27,7 +28,7 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <label for="station_id">name:</label>
+              <label for="station_id">Filial:</label>
               <ng-select
                 formControlName="station_id"
                 [items]="postos"
@@ -38,7 +39,7 @@
                 [loadingText]="'Carregando...'"
                 [notFoundText]="'Lista de Postos Vázia'"
                 [clearable]="false"
-                [searchable]="true"
+                [searchable]="false"
               >
                 <ng-template let-item="item" ng-label-tmp>
                   {{item.id}} - {{item.name}}
@@ -51,7 +52,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="usuario">
           <div class="col-12 col-xl-6">
             <div class="form-group">
               <label for="name">Data cadastro:</label>

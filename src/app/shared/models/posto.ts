@@ -1,5 +1,5 @@
 export interface Posto {
-  id?: string;
+  id?: number;
   cnpj: string;
   name: string;
   itau_client_id: string;

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Location as LocationState} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Atendente} from '../../../shared/models/atendente';
 import {PostosService} from '../../../shared/services/postos.service';
 import {Posto} from '../../../shared/models/posto';
+import {NbDialogRef} from '@nebular/theme';
+import {AtendentesService} from '../../../shared/services/atendentes.service';
+import {ToastService} from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'ngx-atendentes-edit',
@@ -18,7 +19,6 @@ export class AtendentesEditComponent implements OnInit {
     atendente: false,
   };
 
-  atendenteAtual: number;
   atendente: Atendente;
 
   form: FormGroup;
@@ -26,9 +26,10 @@ export class AtendentesEditComponent implements OnInit {
   postos: Posto[];
 
   constructor(
-    private location: LocationState,
-    private route: ActivatedRoute,
+    protected dialogRef: NbDialogRef<any>,
     private postoServeice: PostosService,
+    private atendentesService: AtendentesService,
+    private toastService: ToastService,
   ) {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
@@ -38,12 +39,13 @@ export class AtendentesEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPostos();
-    this.atendenteAtual = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.atendenteAtual > 0) {
-      this.atendente = this.location.getState() as Atendente;
+    if (this.atendente) {
       this.form.patchValue(this.atendente);
-      console.log(this.atendente);
     }
+  }
+
+  close(): void {
+    this.dialogRef.close(null);
   }
 
   getPostos() {
@@ -57,5 +59,32 @@ export class AtendentesEditComponent implements OnInit {
         this.loading.postos = false;
       }
     );
+  }
+
+  onSubmit() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      if (this.atendente) {
+        this.atendentesService.updateAtendentes(this.atendente.id, this.form.value).subscribe(
+          response => {
+            this.dialogRef.close({...this.form.value, id: this.atendente.id});
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.atendentesService.createAtendentes(this.form.value).subscribe(
+          response => {
+            this.dialogRef.close({...this.form.value});
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    } else {
+      this.toastService.showToastDanger('Verifique os campos e tente novamente.', 'Ops')
+    }
   }
 }

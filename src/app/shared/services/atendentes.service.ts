@@ -16,4 +16,11 @@ export class AtendentesService {
   getAtendentes(page: number = 1): Observable<any> {
     return this.http.get<any>(`${environment.urlApi}/attendants?page=${page}`);
   }
+
+  updateAtendentes(id: number, atendente): Observable<any> {
+    return this.http.put<any>(`${environment.urlApi}/attendants/${id}`, atendente);
+  }
+  createAtendentes(atendente): Observable<any> {
+    return this.http.post<any>(`${environment.urlApi}/attendants`, atendente);
+  }
 }

@@ -1,53 +1,49 @@
-<div class="row d-flex justify-content-center">
-  <div class="col-8">
-    <form [formGroup]="form">
+<form [formGroup]="form" (submit)="onSubmit()">
 
-      <nb-card>
-        <nb-card-header>Editar Atendente</nb-card-header>
-        <nb-card-body>
-          <div class="row">
-            <div class="col-12">
-              <label class="col-form-label">Nome</label>
-              <input type="text" placeholder="Text field" formControlName="name" nbInput fullWidth>
-            </div>
-            <div class="col-12">
-              <label class="col-form-label">Filial</label>
-              <ng-select
-                formControlName="station_id"
-                [items]="postos"
-                bindLabel="name"
-                bindValue="id"
-                [loading]="loading.postos"
-                [loadingText]="'Carregando'"
-                [notFoundText]="'Lista de Categorias Vazia'"
-                [clearable]="false"
-                [searchable]="true"
-              >
-                <ng-template let-item="item" ng-label-tmp>
-                  {{item.id}} - {{item.name}}
-                </ng-template>
-                <ng-template let-index="index" let-item="item" ng-option-tmp>
-                  {{item.id}} - {{item.name}}
-                </ng-template>
-              </ng-select>
-            </div>
-          </div>
+  <nb-card>
+    <nb-card-header>Editar Atendente</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-12">
+          <label class="col-form-label">Nome</label>
+          <input type="text" placeholder="Text field" formControlName="name" nbInput fullWidth>
+        </div>
+        <div class="col-12">
+          <label class="col-form-label">Filial</label>
+          <ng-select
+            formControlName="station_id"
+            [items]="postos"
+            bindLabel="name"
+            bindValue="id"
+            [loading]="loading.postos"
+            [loadingText]="'Carregando'"
+            [notFoundText]="'Lista de Categorias Vazia'"
+            [clearable]="false"
+            [searchable]="false"
+          >
+            <ng-template let-item="item" ng-label-tmp>
+              {{item.id}} - {{item.name}}
+            </ng-template>
+            <ng-template let-index="index" let-item="item" ng-option-tmp>
+              {{item.id}} - {{item.name}}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
 
-        </nb-card-body>
-        <nb-card-footer>
+    </nb-card-body>
+    <nb-card-footer>
 
-          <div class="row d-flex justify-content-between mt-3">
-            <div class="col-3">
-              <button type="button" [routerLink]="['/atendentes']" nbButton fullWidth>Voltar</button>
-            </div>
-            <div class="col-3">
-              <button type="button" status="success" nbButton fullWidth>Salvar</button>
-            </div>
-          </div>
+      <div class="row d-flex justify-content-between">
+        <div class="col-6">
+          <button nbButton fullWidth status="basic" type="button" (click)="close()"><nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar</button>
+        </div>
+        <div class="col-6">
+          <button nbButton fullWidth status="success" type="submit"><nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar</button>
+        </div>
+      </div>
 
-        </nb-card-footer>
-      </nb-card>
+    </nb-card-footer>
+  </nb-card>
 
-    </form>
-  </div>
-</div>
+</form>

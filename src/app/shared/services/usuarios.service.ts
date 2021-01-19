@@ -20,4 +20,12 @@ export class UsuariosService {
   updateUsuarios(id: number, usuario): Observable<Usuario> {
     return this.http.put<Usuario>(`${environment.urlApi}/users/${id}`, usuario);
   }
+
+  updatePasswordUsuario(id: number, usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${environment.urlApi}/users/${id}/password`, usuario);
+  }
+
+  createUsuarios(usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${environment.urlApi}/users`, usuario);
+  }
 }

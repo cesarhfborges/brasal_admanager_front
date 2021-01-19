@@ -38,7 +38,9 @@ export class UsuariosEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPostos();
-    this.form.patchValue(this.usuario);
+    if (this.usuario) {
+      this.form.patchValue(this.usuario);
+    }
   }
 
   close(): void {
@@ -60,13 +62,27 @@ export class UsuariosEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.usuariosService.updateUsuarios(this.usuario.id, this.form.value).subscribe(
-      response => {
-        this.dialogRef.close({status: true, data: this.form.value});
-      },
-      error => {
-        console.log(error);
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      if (this.usuario) {
+        this.usuariosService.updateUsuarios(this.usuario.id, this.form.value).subscribe(
+          response => {
+            this.dialogRef.close({...this.form.value, id: this.usuario.id});
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.usuariosService.createUsuarios(this.form.value).subscribe(
+          response => {
+            this.dialogRef.close({...this.form.value});
+          },
+          error => {
+            console.log(error);
+          }
+        );
       }
-    );
+    }
   }
 }

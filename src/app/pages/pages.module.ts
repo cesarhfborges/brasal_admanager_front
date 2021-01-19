@@ -26,6 +26,7 @@ import { AtendentesListComponent } from './atendentes/list/atendentes-list.compo
 import { AtendentesEditComponent } from './atendentes/edit/atendentes-edit.component';
 import {NgSelectModule} from "@ng-select/ng-select";
 import {NgxMaskModule} from "ngx-mask";
+import { UsuariosPasswordComponent } from './usuarios/password/usuarios-password/usuarios-password.component';
 
 @NgModule({
     imports: [
@@ -56,6 +57,7 @@ import {NgxMaskModule} from "ngx-mask";
     FiliaisEditComponent,
     AtendentesListComponent,
     AtendentesEditComponent,
+    UsuariosPasswordComponent,
   ],
 })
 export class PagesModule {

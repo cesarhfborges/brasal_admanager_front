@@ -3,6 +3,9 @@ import {Router} from '@angular/router';
 import {PostosService} from '../../../shared/services/postos.service';
 import {Posto} from '../../../shared/models/posto';
 import {Pagination} from '../../../shared/models/pagination';
+import {NbDialogService} from '@nebular/theme';
+import {FiliaisEditComponent} from '../edit/filiais-edit.component';
+import {ToastService} from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'ngx-filiais-list',
@@ -22,14 +25,16 @@ export class FiliaisListComponent implements OnInit {
 
   cols = [
     {field: 'id', header: '#', width: '100px', class: 'text-center'},
-    {field: 'cnpj', header: 'CNPJ', width: 'auto', class: ''},
     {field: 'name', header: 'Nome', width: 'auto', class: ''},
+    {field: 'cnpj', header: 'CNPJ', width: 'auto', class: ''},
   ];
 
 
   constructor(
     private router: Router,
     private postosService: PostosService,
+    private dialogService: NbDialogService,
+    private toastService: ToastService,
   ) {
   }
 
@@ -50,6 +55,55 @@ export class FiliaisListComponent implements OnInit {
       e => {
         console.log(e);
         this.loading.filiais = false;
+      }
+    );
+  }
+
+  editarPosto(posto: Posto) {
+    this.dialogService.open(FiliaisEditComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: false,
+      hasBackdrop: true,
+      hasScroll: true,
+      context: {
+        posto: posto,
+      },
+      dialogClass: 'model-full'
+    }).onClose.subscribe(
+      (response) => {
+        if (response) {
+          const p = this.postos.find(ps => ps.id = response.id);
+          p.name = response.name;
+          p.cnpj = response.cnpj;
+          p.itau_client_id = response.itau_client_id;
+          this.toastService.showToastSuccess('Filial atualizada.', 'Sucesso');
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  cadastrarPosto() {
+    this.dialogService.open(FiliaisEditComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: false,
+      hasBackdrop: true,
+      hasScroll: true,
+      context: {
+        posto: null,
+      },
+      dialogClass: 'model-full'
+    }).onClose.subscribe(
+      (response) => {
+        if (response) {
+          this.toastService.showToastSuccess('Filial Cadastrada.', 'Sucesso');
+          this.getPostos(1);
+        }
+      },
+      error => {
+        console.log(error);
       }
     );
   }
