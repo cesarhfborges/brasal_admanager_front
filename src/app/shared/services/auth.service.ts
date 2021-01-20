@@ -53,23 +53,13 @@ export class AuthService {
   }
 
   logout(): void {
-    this.logoutExec().subscribe(
-      response => {
-        this.toastService.showToastSuccess('Logout efetuado com sucesso', '')
-      },
-      error => {
-        localStorage.removeItem('contents');
-        this.usuario = null;
-        this.token = null;
-        window.location.reload();
-      },
-      () => {
-        localStorage.removeItem('contents');
-        this.usuario = null;
-        this.token = null;
-        window.location.reload();
-      }
-    );
+    this.toastService.showToastSuccess('Logout efetuado com sucesso.', 'Atenção');
+    setTimeout(() => {
+      localStorage.removeItem('contents');
+      this.usuario = null;
+      this.token = null;
+      window.location.reload();
+    }, 2000);
   }
 
   private logoutExec(): Observable<any> {
