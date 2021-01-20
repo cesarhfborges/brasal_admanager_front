@@ -24,10 +24,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private toastService: ToastService,
   ) {
     this.form = new FormGroup({
-      username: new FormControl('sandbox21', [Validators.required, Validators.minLength(2)]),
-      password: new FormControl('%h3qT$VX5t', [Validators.required, Validators.minLength(2)]),
+      username: new FormControl(null, [Validators.required, Validators.minLength(2)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       remember: new FormControl(true, [Validators.required]),
     });
+    if (!environment.production) {
+      this.form.patchValue({username: 'sandbox21', password: '%h3qT$VX5t'});
+    }
   }
 
   ngOnInit(): void {

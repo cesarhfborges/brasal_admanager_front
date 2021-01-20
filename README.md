@@ -31,3 +31,15 @@ Problemas de cache
 ```
 php artisan cache:clear
 ```
+
+## Build 
+
+Producao
+```
+npm run build:prod
+```
+
+Homologação
+```
+npm run build:homologacao
+```
