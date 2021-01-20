@@ -47,14 +47,13 @@ export class FiliaisListComponent implements OnInit {
     this.loading.filiais = true;
     this.postosService.getPostos(page).subscribe(
       response => {
-        console.log(response);
         this.loading.filiais = false;
         this.postos = response.data;
         this.pagination = response;
         delete this.pagination['data'];
       },
-      e => {
-        console.log(e);
+      error => {
+        console.log(error);
         this.loading.filiais = false;
       }
     );

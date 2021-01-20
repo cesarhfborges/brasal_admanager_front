@@ -46,7 +46,6 @@ export class UsuariosPasswordComponent implements OnInit {
       if (this.form.get('password').value === this.form.get('confirm_password').value) {
         this.usuariosService.updatePasswordUsuario(this.usuario.id, this.form.value).subscribe(
           response => {
-            console.log(response);
             this.dialogRef.close({...response});
           }
         );

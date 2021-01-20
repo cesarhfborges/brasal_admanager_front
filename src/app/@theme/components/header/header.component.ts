@@ -108,8 +108,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if ( item.action === 'logout' ) {
       this.authService.logout();
     } else if ( item.action === 'profile' ) {
-      // Do something on Profile
-      console.log('Rota para Perfil')
+      // Rota para Perfil
     }
   }
 }

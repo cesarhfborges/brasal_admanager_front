@@ -85,7 +85,6 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     this.relatoriosService.gerarRelatorio(this.form.value).subscribe(
       response => {
-        console.log(response);
         this.relatorio = response;
       },
       error => {

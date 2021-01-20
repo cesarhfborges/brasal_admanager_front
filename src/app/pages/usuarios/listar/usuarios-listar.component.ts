@@ -57,7 +57,6 @@ export class UsuariosListarComponent implements OnInit {
   getUsuarios(page: number = 1) {
     this.usuariosService.getUsuarios(page).subscribe(
       response => {
-        console.log(response.data);
         this.usuarios = response.data as Usuario[];
         this.pagination = response;
         delete this.pagination['data'];
@@ -86,7 +85,6 @@ export class UsuariosListarComponent implements OnInit {
     }).onClose.subscribe(
       (response) => {
         if (response) {
-          console.log(response);
           const p = this.usuarios.find(ps => ps.id = response.id);
           p.name = response.name;
           p.username = response.username;

@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.inputUsr);
   }
 
   ngAfterViewInit(): void {

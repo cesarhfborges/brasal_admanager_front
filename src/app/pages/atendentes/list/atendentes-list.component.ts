@@ -53,8 +53,6 @@ export class AtendentesListComponent implements OnInit {
     this.atendentesService.getAtendentes({page: pag, limit: this.filter.limit, sort: this.filter.orderBy, station: this.filter.station}).subscribe(
       response => {
         // @ts-ignore
-        console.log(response.data);
-        // @ts-ignore
         this.atendentes = response.data;
         this.pagination = response;
         delete this.pagination['data'];
@@ -75,7 +73,6 @@ export class AtendentesListComponent implements OnInit {
     }).onClose.subscribe(
       (response) => {
         if (response) {
-          console.log(response);
           const p = this.atendentes.find(ps => ps.id = response.id);
           p.name = response.name;
           p.station_id = response.station_id;
