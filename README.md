@@ -43,3 +43,9 @@ Homologação
 ```
 npm run build:homologacao
 ```
+
+Manual
+Alterar o base-href para o path final onde a aplicação vai rodar.
+```
+npm run build -- --prod --aot --base-href /admin/
+```
