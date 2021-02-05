@@ -3,7 +3,7 @@ export interface Usuario {
   name: string;
   username: string;
   email: string;
-  station_id: number;
+  station_id?: number;
   created_at?: Date | string;
   updated_at?: Date | string;
 }

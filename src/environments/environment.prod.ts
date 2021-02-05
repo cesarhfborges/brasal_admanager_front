@@ -5,6 +5,5 @@
  */
 export const environment = {
   production: true,
-  urlApi: 'https://hpix.brasal.com.br/api/sandbox/admin'
-  // urlApi: 'https://pix.brasal.com.br/api/sandbox'
+  urlApi: 'https://pix.brasal.com.br/api/v2/admin'
 };

@@ -25,8 +25,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     children: [
       {
-        title: 'Listar',
+        title: 'postos',
+        icon: 'car-outline',
         link: '/usuarios',
+      },
+      {
+        title: 'admins',
+        icon: 'person-done-outline',
+        link: '/admins',
       },
     ],
   },

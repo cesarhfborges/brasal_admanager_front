@@ -27,6 +27,8 @@ import {IConfig, NgxMaskModule} from 'ngx-mask';
 import {PasswordStrengthMeterModule} from 'angular-password-strength-meter';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 registerLocaleData(localePt);
 
@@ -52,6 +54,7 @@ const dateFnsConfig: NbDateFnsOptions = {
     AppRoutingModule,
     NgSelectModule,
     PasswordStrengthMeterModule,
+    ConfirmDialogModule,
     NbDateFnsDateModule.forRoot(dateFnsConfig),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
@@ -64,6 +67,7 @@ const dateFnsConfig: NbDateFnsOptions = {
     NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [
+    ConfirmationService,
     {provide: LOCALE_ID, useValue: 'pt-PT'},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

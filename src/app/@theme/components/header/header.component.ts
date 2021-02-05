@@ -1,13 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
-
-import {UserData} from '../../../@core/data/users';
+import {map, takeUntil} from 'rxjs/operators';
 import {LayoutService} from '../../../@core/utils';
-import {filter, map, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Usuario} from '../../../shared/models/usuario';
+import {Subject} from 'rxjs';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-header',
@@ -78,7 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe(themeName => this.currentTheme = themeName);
 
-    this.menuService.onItemClick().subscribe(( event ) => {
+    this.menuService.onItemClick().subscribe((event) => {
       this.onItemSelection(event.item);
     })
   }
@@ -104,10 +102,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  onItemSelection( item ) {
-    if ( item.action === 'logout' ) {
+  onItemSelection(item) {
+    if (item.action === 'logout') {
       this.authService.logout();
-    } else if ( item.action === 'profile' ) {
+    } else if (item.action === 'profile') {
       // Rota para Perfil
     }
   }

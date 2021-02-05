@@ -28,6 +28,9 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {NgxMaskModule} from "ngx-mask";
 import { UsuariosPasswordComponent } from './usuarios/password/usuarios-password/usuarios-password.component';
 import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
+import { AdminsListComponent } from './admins/list/admins-list.component';
+import { AdminsEditComponent } from './admins/edit/admins-edit.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
     imports: [
@@ -51,7 +54,8 @@ import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
         PasswordStrengthMeterModule,
         NbSelectModule,
         FormsModule,
-        NbDatepickerModule
+        NbDatepickerModule,
+        ConfirmDialogModule
     ],
   declarations: [
     PagesComponent,
@@ -63,6 +67,8 @@ import {PasswordStrengthMeterModule} from "angular-password-strength-meter";
     AtendentesListComponent,
     AtendentesEditComponent,
     UsuariosPasswordComponent,
+    AdminsListComponent,
+    AdminsEditComponent,
   ],
 })
 export class PagesModule {

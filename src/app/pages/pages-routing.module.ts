@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {UsuariosListarComponent} from './usuarios/listar/usuarios-listar.component';
 import {FiliaisListComponent} from './filiais/list/filiais-list.component';
 import {AtendentesListComponent} from './atendentes/list/atendentes-list.component';
+import {AdminsListComponent} from './admins/list/admins-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,6 +28,10 @@ const routes: Routes = [{
       path: 'usuarios',
       component: UsuariosListarComponent,
     },
+    {
+      path: 'admins',
+      component: AdminsListComponent,
+    }
   ],
 }];
 

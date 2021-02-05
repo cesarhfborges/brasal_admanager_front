@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
+  // urlApi: 'https://pix.brasal.com.br/api/v2/admin'
   urlApi: 'http://localhost:8000/admin'
 };

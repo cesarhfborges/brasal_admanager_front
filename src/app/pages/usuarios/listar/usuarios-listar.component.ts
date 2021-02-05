@@ -85,7 +85,7 @@ export class UsuariosListarComponent implements OnInit {
     }).onClose.subscribe(
       (response) => {
         if (response) {
-          const p = this.usuarios.find(ps => ps.id = response.id);
+          const p = this.usuarios.find(ps => ps.id === response.id);
           p.name = response.name;
           p.username = response.username;
           p.email = response.email;

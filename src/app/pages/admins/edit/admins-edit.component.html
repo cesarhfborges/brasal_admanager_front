@@ -1,0 +1,84 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <nb-card style="width: 720px;" [nbSpinner]="loading.admin" nbSpinnerMessage="Carregando lista de usuários..." nbSpinnerStatus="primary">
+
+
+    <nb-card-header>Editar Usuário</nb-card-header>
+
+    <nb-card-body>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="name">Nome: <span class="text-danger">*</span></label>
+            <input type="text" id="name" placeholder="Henrique Malheiro Bastos" formControlName="name" nbInput fullWidth>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="username">Usuario:<span class="text-danger">*</span></label>
+            <input type="text" id="username" name="username" placeholder="Ex. henriquebastos" formControlName="username" nbInput fullWidth>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">E-Mail:<span class="text-danger">*</span></label>
+            <input type="text" id="email" name="email" placeholder="Ex. hbastos@brasal.com.br" formControlName="email" nbInput fullWidth>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="admin">
+        <div class="col-12 col-xl-6">
+          <div class="form-group">
+            <label for="name">Data cadastro:</label>
+            <input type="text" [value]="admin.created_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+          </div>
+        </div>
+        <div class="col-12 col-xl-6">
+          <div class="form-group">
+            <label for="name">Últ. atualização:</label>
+            <input type="text" [value]="admin.updated_at | date : 'dd/MM/yyyy HH:mm:ss'" nbInput fullWidth disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <p>Alteração de senha: (opcional)</p>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" formControlName="password" nbInput fullWidth>
+          </div>
+          <password-strength-meter [password]="form.get('password').value"></password-strength-meter>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password_confirmation">Confirmação:</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" formControlName="password_confirmation" nbInput fullWidth>
+          </div>
+        </div>
+      </div>
+
+    </nb-card-body>
+
+    <nb-card-footer>
+
+      <div class="row d-flex justify-content-between">
+        <div class="col-6">
+          <button nbButton fullWidth status="basic" type="button" (click)="close()"><nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar</button>
+        </div>
+        <div class="col-6">
+          <button nbButton fullWidth status="success" type="submit"><nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar</button>
+        </div>
+      </div>
+
+    </nb-card-footer>
+
+
+  </nb-card>
+
+</form>

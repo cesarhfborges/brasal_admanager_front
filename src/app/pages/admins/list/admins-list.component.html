@@ -1,0 +1,82 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>
+        <div class="row">
+          <div class="col-8 pt-2">
+            Lista de Administradores
+          </div>
+          <div class="col-4 d-flex justify-content-end">
+            <button type="button" status="success" nbButton (click)="createAdmin()">
+              <nb-icon icon="plus-circle-outline"></nb-icon>&nbsp;Cadastrar
+            </button>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+
+        <p-table
+          [columns]="cols"
+          [loading]="loading.admins"
+          [rows]="15"
+          [value]="admins"
+          dataKey="id"
+          class="p-datatable-responsive-demo"
+        >
+          <ng-template pTemplate="loading">
+            <tr>
+              <th class="text-center" colspan="{{cols.length}}">
+                Carregando Aguarde...
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-columns pTemplate="header">
+            <tr>
+              <th *ngFor="let col of columns" [ngStyle]="{width: col.width}" class="{{col.class}}">
+                {{col.header}}
+              </th>
+              <th style="width: 180px;"></th>
+            </tr>
+          </ng-template>
+          <ng-template let-columns="columns" let-rowData pTemplate="body">
+            <tr>
+              <td *ngFor="let col of cols" class="{{col.class}}" [ngSwitch]="col.field">
+                <ng-template ngSwitchDefault>
+                  <span class="p-column-title">{{col.header}}</span>
+                  {{rowData[col.field]}}
+                </ng-template>
+              </td>
+              <td class="d-flex justify-content-between">
+                <button
+                  nbButton
+                  outline
+                  status="info"
+                  type="button"
+                  class="text-center"
+                  (click)="editAdmin(rowData)"
+                >
+                  <nb-icon icon="edit-outline"></nb-icon>
+                  <span class="d-block d-md-none">Editar</span>
+                </button>
+                <button
+                  nbButton
+                  outline
+                  status="danger"
+                  type="button"
+                  class="text-center"
+                  (click)="deleteAdmin(rowData)"
+                >
+                  <nb-icon icon="trash-2-outline"></nb-icon>
+                  <span class="d-block d-md-none">Excluir</span>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
